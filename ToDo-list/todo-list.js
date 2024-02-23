@@ -6,16 +6,13 @@ function Task(description, category) {
     return Task
   }
   
-  // To-Do list object with tasks and methods
   function ToDoList() {
     this.tasks = [];
   
-    // Add a task with description and category
     this.addTask = (description, category) => {
       this.tasks.push(new Task(description, category));
     };
   
-    // Display tasks grouped by category
     this.displayTasks = () => {
       const groupedTasks = {};
       for (const task of this.tasks) {
@@ -55,24 +52,18 @@ function Task(description, category) {
     };
   }
   
-  // Create a To-Do list and add some tasks
   const myToDoList = new ToDoList();
   myToDoList.addTask("Buy groceries", "Chores");
   myToDoList.addTask("Finish project", "Work");
   myToDoList.addTask("Read a book", "Leisure");
   
-  // Display tasks
   myToDoList.displayTasks();
   
-  // Mark a task completed
   myToDoList.markCompleted("Buy groceries");
   
-  // Display updated tasks
   myToDoList.displayTasks();
   
-  // Remove a task
   myToDoList.removeTask("Finish project");
   
-  // Display tasks after removal
   myToDoList.displayTasks();
   
