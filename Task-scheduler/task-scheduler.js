@@ -1,90 +1,79 @@
-
-
 var tasks = [
-    {
-        title:'chore',
-        description:'wash dishes',
-        duedate:new Date("2024-02-24"),
-        complete: false
-    },
-    {
-        title:'Appointemnt',
-        description:'Skin checkup',
-        duedate:new Date("2024-02-28"),
-        complete: false
-    },
-    {
-        title:'Leisure',
-        description:'Staycation',
-        duedate:new Date("2024-03-30"),
-        complete: false
-    },
-    {
-        title:'Shopping',
-        description:'Buy groceries',
-        duedate:new Date("2024-02-20"),
-        complete: false
-    },
+  {
+      title: 'Chore',
+      description: 'Wash dishes',
+      dueDate: new Date("2024-02-24"),
+      complete: false
+  },
+  {
+      title: 'Leisure',
+      description: 'Staycation',
+      dueDate: new Date("2024-03-30"),
+      complete: false
+  },
+  {
+      title: 'Shopping',
+      description: 'Buy groceries',
+      dueDate: new Date("2024-02-20"),
+      complete: false
+  },
 ];
 
-const addTask = (title, description, duedate, complete = false) =>{
-    var newTask = {
-        title : title,
-        description :description,
-        duedate : duedate,
-        complete : complete,
-    };
-    tasks.push(newTask)
+const addTask = (title, description, dueDate, complete = false) => {
+  var newTask = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      complete: complete
+  };
+  tasks.push(newTask);
 };
 
-addTask('praying', 'Go to church', 'new date(2024-02-25)')
-console.log(tasks)
 
+addTask('Exercise', 'Go for a run', new Date("2024-02-15"));
+addTask('Study', 'Read a book', new Date("2024-03-10"));
+// console.log(tasks)
 
-// 
-function displayTasks() {
-    tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  
-    console.log("Tasks:");
-    for (const task of tasks) {
-      const status = task.complete ? "Completed" : "Pending";
-      console.log(
-        `${task.title} - ${task.description} (${task.dueDate.toDateString()}) - ${status}`
-      );
-    }
+const displayTasksSortedByDueDate = () => {
+  tasks.sort((a, b) => a.dueDate - b.dueDate);
+  tasks.forEach(task => {
+      console.log(`${task.title} - Due Date: ${task.dueDate.toLocaleDateString()} - Completed: ${task.complete ? 'Yes' : 'No'}`);
+      console.log(`Description: ${task.description}`);
+  });
+};
+
+// console.log('Tasks sorted by due date:');
+// displayTasksSortedByDueDate();
+
+const updateTask = (title, updatedDescription, updatedDueDate, isComplete) => {
+  const taskIndex = tasks.findIndex(task => task.title === title);
+  if (taskIndex !== -1) {
+      tasks[taskIndex].description = updatedDescription;
+      tasks[taskIndex].dueDate = updatedDueDate;
+      tasks[taskIndex].complete = isComplete;
+      console.log(`Task "${title}" has been updated.`);
+  } else {
+      console.log('Task not found!');
   }
-  
-  function updateTask( newTitle, newDescription, newDueDate) {
-    // const taskIndex = taskId - 1;
-    if (taskIndex >= 0 && taskIndex < tasks.length) {
-      tasks[taskIndex].title = newTitle || tasks[taskIndex].title;
-      tasks[taskIndex].description = newDescription || tasks[taskIndex].description;
-      tasks[taskIndex].dueDate = newDueDate || tasks[taskIndex].dueDate;
-      console.log("Task updated successfully!");
-    } else {
-      console.log("Invalid task ID!");
-    }
-  }
-  
-  function markCompleted(taskId) {
-    const taskIndex = taskId - 1;
-    if (taskIndex >= 0 && taskIndex < tasks.length) {
-      tasks[taskIndex].complete = true;
-      console.log("Task marked as completed!");
-    } else {
-      console.log("Invalid task ID!");
-    }
-  }
-  
-  function deleteTask(taskId) {
-    const taskIndex = taskId - 1;
-    if (taskIndex >= 0 && taskIndex < tasks.length) {
+};
+
+// updateTask('Leisure', 'Staycation', new Date("2024-03-30"), true);
+// console.log('Tasks after updating:');
+// displayTasksSortedByDueDate();
+
+const removeTask = (title) => {
+  const taskIndex = tasks.findIndex(task => task.title === title);
+  if (taskIndex !== -1) {
       tasks.splice(taskIndex, 1);
-      console.log("Task deleted successfully!");
-    } else {
-      console.log("Invalid task ID!");
-    }
+      console.log(`Task "${title}" has been removed.`);
+  } else {
+      console.log('Task not found!');
   }
-  
+};
 
-  
+// removeTask('Exercise');
+
+// console.log('Tasks after removal:');
+// displayTasksSortedByDueDate();
+
+

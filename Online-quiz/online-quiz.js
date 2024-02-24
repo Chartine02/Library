@@ -1,157 +1,75 @@
+const askQuestion = require('prompt-sync')();
+const quiz = [
+    {
+        question: "What is the git command to stage new changes in <directory>?",
+        options: [
+            "git clone <repo>",
+            "git add <directory>",
+            "git commit <directory>"
+        ],
+        correctAnswer: "git add <directory>"
+    },
+    {
+        question: "What is the git command to list all your branches in your repo?",
+        options: [
+            "git status",
+            "git stash",
+            "git branch"
+        ],
+        correctAnswer: "git branch"
+    },
+    {
+        question: "What is the git command to clone a remote repository to your local machine?",
+        options: [
+            "git clone <url>",
+            "git add <directory>",
+            "git clone <repo>"
+        ],
+        correctAnswer: "git clone <url>"
+    },
+    {
+        question: "What is the git command to Show the history of commits in the repository?",
+        options: [
+            "git log",
+            "git init",
+            "git stash"
+        ],
+        correctAnswer: "git log"
+    },
+    {
+        question: "What is the git command to Switch to a different branch?",
+        options: [
+            "git branch <branch_name>",
+            "git checkout <branch_name>",
+            "git merge <branch_name>"
+        ],
+        correctAnswer: "git checkout <branch_name>"
+    }
+];
 
-
-const askQuestion = require('prompt-sync');
-const prompt = askQuestion()
-
-var quiz =[
-    {
-        question:"what is the git command to stage new changes in <directory>",
-        answer1:"git clone <repo>",
-        answer2:"git add <directory>",
-        answer3:"git commit <directory>",
-    },
-    {
-        question:"what is the git command to list all your branches in your repo",
-        answer1:"git status",
-        answer2:"git stash",
-        answer3:"git branch",
-    },
-    {
-        question:"what is the git command to clone a remote repository to your local machine",
-        answer1:"git clone <url>",
-        answer2:"git add <directory>",
-        answer3:"git clone <repo>",
-    },
-    {
-        question:"what is the git command to Show the history of commits in the repository",
-        answer1:"git log",
-        answer2:"git init",
-        answer3:"git stash",
-    },
-    {
-        question:"what is the git command to Switch to a different branch",
-        answer1:"git branch <branch_name>",
-        answer2:"git checkout <branch_name>",
-        answer3:"git merge <branch_name>",
-    },
-]
-
-/ const displayQuestions = () => {
-        for(i =0; i <quiz.length; i++){
-            console.log(quiz[i])
-            questionIndex = 
-            let choose = prompt("Choose the correct answer!")
-            }
-        }
-}
 let score = 0;
-let questionIndex = 0;
 
-function displayRandomQuestion() {
-    const randomIndex = Math.
-    floor(Math.random() * quiz.length);
-    const currentQuestion = quiz[randomIndex];
+const displayQuestions = () => {
+    for (let i = 0; i < quiz.length; i++) {
+        let questionIndex = i
+        // let questionIndex = Math.floor(Math.random() * quiz.length);
+        let currentQuestion = quiz[questionIndex];
 
-    questionIndex = randomIndex; // Store for later use
+        console.log(currentQuestion.question);
+        currentQuestion.options.forEach((option, index) => {
+            console.log(`${index + 1}. ${option}`);
+        });
 
-    // Display the question and shuffle the answer options
-    console.log(currentQuestion.question);
-    const shuffledAnswers = shuffleArray([currentQuestion.answer1, currentQuestion.answer2, currentQuestion.answer3]);
-    for (let i = 0; i < shuffledAnswers.length; i++) {
-        console.log(`${i + 1}. ${shuffledAnswers[i]}`);
+        let userAnswer = askQuestion("Enter your answer: ").toLowerCase();
+        if (userAnswer === currentQuestion.correctAnswer.toLowerCase()) {
+            console.log("Correct!");
+            score++;
+        } else {
+            console.log("Incorrect. The correct answer is: " + currentQuestion.correctAnswer);
+        }
     }
-}
+};
 
-function shuffleArray(array) {
-    const shuffled = array.slice(0); // Create a copy to avoid modifying the original array
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
+displayQuestions();
 
-function checkAnswer(userInput) {
-    const expectedAnswer = quiz[questionIndex].correctAnswer; // Use previously stored index
-    const userAnswer = parseInt(userInput, 10); // Convert to number
-
-    if (userAnswer === expectedAnswer) {
-        console.log("Correct!");
-        score++;
-    } else {
-        console.log("Incorrect. The correct answer is:", quiz[questionIndex].answer1, quiz[questionIndex].answer2, quiz[questionIndex].answer3)[expectedAnswer - 1]; // Provide correct answer
-    }
-}
-
-// Start the quiz
-displayRandomQuestion();
-
-let answer;
-while ((answer = prompt("Enter your answer (number):")) !== null) {
-    checkAnswer(answer);
-    displayRandomQuestion();
-}
-
-// Display final score
-console.log("Final score:", score, "/", quiz.length)
-
-// questionIndex =quiz[i]
-
-// const displayQuestions = () => {
-//     for(i =0; i <quiz.length; i++){
-//         console.log(quiz[i])
-//         questionIndex = 
-//         let choose = prompt("Choose the correct answer!")
-//         for (choose in quiz){if (quiz[1] === "answer2"){
-//             console.group("correct!")
-//         }else if (quiz[2] === 'answer1'){
-//             console.log('Wrong')
-//         }
-//         }
-//         // } console.log("Correct!") : console.log("Wrong! the correct answer is : git add <directory>");
-//         // correct = (quiz[i] === "answer3")? console.log("Correct!") : console.log("Wrong! the correct answer is : git branch");
-//         // correct = (quiz[2] === "answer1")? console.log("Correct!") : console.log("Wrong! the correct answer is : git clone <url>");
-//         // correct = (quiz[3] === "answer1")? console.log("Correct!") : console.log("Wrong! the correct answer is : git log");
-//         // correct = (quiz[4] === "answer2")? console.log("Correct!") : console.log("Wrong! the correct answer is : git checkout <branch_name>");}
-//     }
-// }
-// displayQuestions()
-
-
-
-// // let randomNum = Math.floor(Math.random() * 4);
-// // console.log(randomNum)
-
-// // function askQuestion(question) {
-// //     return prompt(question);
-// // }
-// // askQuestion(quiz[randomNum].question)
-
-
-// // switch (randomNum) {
-// //     case 0:
-// //     console.log(quiz[randomNum])
-// //     break;
-// //     case 1:
-// //     console.log(quiz[randomNum])
-// //     break;
-// //     case 2:
-// //     console.log(quiz[randomNum])
-// //     break;
-// //     case 3:
-// //     console.log(quiz[randomNum])
-// //     break;
-// //     case 4:
-// //     console.log(quiz[randomNum])
-// //     break;
-// // };
-
-
-
-// // let  correct = (quiz[1] === "answer2")? console.log("Correct!") : console.log("Wrong! the correct answer is : git add <directory>");
-// // correct = (quiz[1] === "answer3")? console.log("Correct!") : console.log("Wrong! the correct answer is : git branch");
-// // correct = (quiz[2] === "answer1")? console.log("Correct!") : console.log("Wrong! the correct answer is : git clone <url>");
-// // correct = (quiz[3] === "answer1")? console.log("Correct!") : console.log("Wrong! the correct answer is : git log");
-// // correct = (quiz[4] === "answer2")? console.log("Correct!") : console.log("Wrong! the correct answer is : git checkout <branch_name>");
-
-// // correct = (quiz[random].question === "answer3")?
+console.log(`Your final score is: ${score}/${quiz.length}`);
